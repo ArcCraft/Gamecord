@@ -52,9 +52,6 @@ module.exports = class SnakeGame {
 
         if (!options.foods) options.foods = [];
         if (typeof options.foods !== 'object')  throw new TypeError('INVALID_FOODS: Foods Emojis must be a array.')
-
-        if (!options.othersMessage) options.othersMessage = 'You are not allowed to use buttons for this message!';
-        if (typeof options.othersMessage !== 'string') throw new TypeError('INVALID_OTHERS_MESSAGE: Others Message must be a string.')
         if (!options.stopButton) options.stopButton = 'Stop';
         if (typeof options.stopButton !== 'string') throw new TypeError('INVALID_STOP_BUTTON: Stop Button must be a string.')
 
@@ -160,7 +157,7 @@ module.exports = class SnakeGame {
         const embed = new MessageEmbed()
         .setColor(this.options.embed.color)
         .setTitle(this.options.embed.title)
-        .setDescription('**Score:** ' + this.score + '\n\n' + this.getGameBoard())
+        .setDescription(this.getGameBoard() + '\n' + `**🏆 Score :** ${this.score}`)
         .setFooter(this.message.author.tag, this.message.author.displayAvatarURL({ dynamic: true }))
 
 
@@ -223,7 +220,7 @@ module.exports = class SnakeGame {
         })
 
         collector.on('collect', async btn => {
-            if (btn.user.id !== this.message.author.id) return btn.reply({ content: this.options.othersMessage.replace('{author}', this.message.author.tag),  ephemeral: true })
+            if (btn.user.id !== this.message.author.id) return;
 
             await btn.deferUpdate();
             const snakeHead = this.snake[0];
