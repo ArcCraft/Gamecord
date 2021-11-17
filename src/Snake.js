@@ -1,7 +1,7 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const { disableButtons } = require('../utils/utils');
 
-       const WIDTH = 18;
+       const WIDTH = 17;
        const HEIGHT = 10;
 
 module.exports = class SnakeGame {
