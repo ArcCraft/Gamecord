@@ -1,7 +1,7 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const { disableButtons } = require('../utils/utils')
 
-const WIDTH = 15;
+const WIDTH = 16;
 const HEIGHT = 10;
 
 
