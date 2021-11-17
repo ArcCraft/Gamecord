@@ -1,12 +1,11 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const { disableButtons } = require('../utils/utils')
 
-const WIDTH = 15;
-const HEIGHT = 10;
-
 
 module.exports = class SnakeGame {
     constructor(options = {}) {
+       const WIDTH = options.w;
+       const HEIGHT = options.h;
         if (!options.message) throw new TypeError('NO_MESSAGE: Please provide a message arguement')
         if (typeof options.message !== 'object') throw new TypeError('INVALID_MESSAGE: Invalid Discord Message object was provided.')
         if (!options.slash_command) options.slash_command = false;
