@@ -20,8 +20,9 @@ module.exports = class SnakeGame {
         if (typeof options.embed.color !== 'string')  throw new TypeError('INVALID_COLOR: Embed Color must be a string.')
         if (!options.embed.overTitle) options.embed.overTitle = 'Game Over';
         if (typeof options.embed.overTitle !== 'string')  throw new TypeError('INVALID_OVER_TITLE: Over Title must be a string.')
+        if(!optuons.embed.overMsg) optuons.embed.overMsg = "You are lose in snake game";
+        // Other : overcolor
 
-        
         if (!options.snake) options.snake = {};
         if (!options.snake.head) options.snake.head = '🟢';
         if (typeof options.snake.head !== 'string')  throw new TypeError('INVALID_EMOJI: Snake Head Emoji must be a string.')
@@ -54,7 +55,7 @@ module.exports = class SnakeGame {
         if (typeof options.foods !== 'object')  throw new TypeError('INVALID_FOODS: Foods Emojis must be a array.')
         if (!options.stopButton) options.stopButton = 'Stop';
         if (typeof options.stopButton !== 'string') throw new TypeError('INVALID_STOP_BUTTON: Stop Button must be a string.')
-
+        // Other : scoretitle,
 
         this.snake = [{ x: 5, y: 5 }];
         this.apple = { x: 1, y: 1 };
@@ -157,8 +158,7 @@ module.exports = class SnakeGame {
         const embed = new MessageEmbed()
         .setColor(this.options.embed.color)
         .setTitle(this.options.embed.title)
-        .setDescription(this.getGameBoard() + '\n' + `**🏆 Score :** ${this.score}`)
-        .setFooter(this.message.author.tag, this.message.author.displayAvatarURL({ dynamic: true }))
+        .setDescription(this.getGameBoard() + '\n' + `**🏆 ${this.options.scoretitle} :** ${this.score}`);
 
 
         const up = new MessageButton().setEmoji(emojis.up).setStyle('PRIMARY').setCustomId('snake_up')
@@ -190,9 +190,7 @@ module.exports = class SnakeGame {
 
         const moveEmbed = new MessageEmbed()
         .setColor(this.options.embed.color)
-        .setTitle(this.options.embed.title)
-        .setDescription('**Score:** ' + this.score + '\n\n' + this.getGameBoard())
-        .setFooter(this.message.author.tag, this.message.author.displayAvatarURL({ dynamic: true }))
+        .setDescription(this.getGameBoard() + '\n' + `**🏆 ${this.options.embed.scoretitle} :** ${this.score}`);
 
         msg.edit({ embeds: [moveEmbed], components: msg.components }) 
     }
@@ -200,13 +198,10 @@ module.exports = class SnakeGame {
 
     async gameOver(msg) {
         this.isInGame = false;
-        const text = '**' + this.options.embed.overTitle + '\nScore: **' + this.score.toString();
-
         const editEmbed = new MessageEmbed()
-        .setColor(this.options.embed.color)
-        .setTitle(this.options.embed.title)
-        .setDescription(text + '\n\n' + this.getGameBoard())
-        .setFooter(this.message.author.tag, this.message.author.displayAvatarURL({ dynamic: true }))
+        .setColor(this.options.embed.overcolor)
+        .setTitle('**' + this.options.embed.overTitle + '**')
+        .setDescription('**' + this.options.embed.overMsg + '**');
 
         return await msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) })
     }
