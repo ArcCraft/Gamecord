@@ -1,8 +1,6 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
-const { disableButtons } = require('../utils/utils')
+const { disableButtons } = require('../utils/utils');
 
-       const WIDTH = ...options.w;
-       const HEIGHT = ...options.h;
 module.exports = class SnakeGame {
     constructor(options = {}) {
         if (!options.message) throw new TypeError('NO_MESSAGE: Please provide a message arguement')
@@ -63,15 +61,17 @@ module.exports = class SnakeGame {
         this.message = options.message;
         this.gameBoard = [];
         this.score = 0;
-
-        for (let y = 0; y < HEIGHT; y++) {
-            for (let x = 0; x < WIDTH; x++) {
-                this.gameBoard[y * WIDTH + x] = this.options.emojis.board;
+        this.WIDTH = options.w;
+        this.HEIGHT = options.h;
+        for (let y = 0; y < this.HEIGHT; y++) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.gameBoard[y * this.WIDTH + x] = this.options.emojis.board;
             }
         }
     }
 
-
+const WIDTH = this.WIDTH;
+       const HEIGHT = this.HEIGHT;
     getGameBoard() {
         let str = '';
         let emojis =  this.options.snake;
