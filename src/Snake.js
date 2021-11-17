@@ -157,7 +157,7 @@ module.exports = class SnakeGame {
         const embed = new MessageEmbed()
         .setColor(this.options.embed.color)
         .setTitle(this.options.embed.title)
-        .setDescription(this.getGameBoard() + '\n' + `**🏆 ${this.options.scoretitle} :** ${this.score}`);
+        .setDescription(this.getGameBoard() + '\n' + `**🏆 ${this.options.embed.scoretitle} :** ${this.score}`);
 
 
         const up = new MessageButton().setEmoji(emojis.up).setStyle('PRIMARY').setCustomId('snake_up')
