@@ -20,7 +20,7 @@ module.exports = class SnakeGame {
         if (typeof options.embed.color !== 'string')  throw new TypeError('INVALID_COLOR: Embed Color must be a string.')
         if (!options.embed.overTitle) options.embed.overTitle = 'Game Over';
         if (typeof options.embed.overTitle !== 'string')  throw new TypeError('INVALID_OVER_TITLE: Over Title must be a string.')
-        if(!optuons.embed.overMsg) optuons.embed.overMsg = "You are lose in snake game";
+        if(!optuons.embed.overMsg) options.embed.overMsg = "You are lose in snake game";
         // Other : overcolor
 
         if (!options.snake) options.snake = {};
