@@ -197,7 +197,8 @@ if(!options.overembed) options.overembed = {};
         const editEmbed = new MessageEmbed()
         .setColor(this.options.embed.overcolor)
         .setTitle('**' + this.options.embed.overTitle + '**')
-        .setDescription('**' + this.options.embed.overMsg + '**');
+        .setDescription('**' + this.options.embed.overMsg + '**')
+        .setThumbnail(this.options.overembed.overth);
 
         return await msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) })
     }
