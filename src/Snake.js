@@ -62,6 +62,7 @@ if(!options.overembed) options.overembed = {};
         this.message = options.message;
         this.gameBoard = [];
         this.score = 0;
+        this.lvl = this.score;
         for (let y = 0; y < HEIGHT; y++) {
             for (let x = 0; x < WIDTH; x++) {
                 this.gameBoard[y * WIDTH + x] = this.options.emojis.board;
@@ -153,7 +154,7 @@ if(!options.overembed) options.overembed = {};
         const embed = new MessageEmbed()
         .setColor(this.options.embed.color)
         .setTitle(this.options.embed.title)
-        .setDescription(this.getGameBoard() + '\n' + `**🏆 ${this.options.embed.scoretitle} :** ${this.score}`);
+        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.lvl / 10}`);
 
 
         const up = new MessageButton().setEmoji(emojis.up).setStyle('PRIMARY').setCustomId('snake_up')
@@ -185,7 +186,7 @@ if(!options.overembed) options.overembed = {};
 
         const moveEmbed = new MessageEmbed()
         .setColor(this.options.embed.color)
-        .setDescription(this.getGameBoard() + '\n' + `**🏆 ${this.options.embed.scoretitle} :** ${this.score}`);
+        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.lvl / 10}`);
 
         msg.edit({ embeds: [moveEmbed], components: msg.components }) 
     }
