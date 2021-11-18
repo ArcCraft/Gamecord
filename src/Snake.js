@@ -62,7 +62,6 @@ if(!options.overembed) options.overembed = {};
         this.message = options.message;
         this.gameBoard = [];
         this.score = 0;
-        this.lvl = this.score;
         for (let y = 0; y < HEIGHT; y++) {
             for (let x = 0; x < WIDTH; x++) {
                 this.gameBoard[y * WIDTH + x] = this.options.emojis.board;
@@ -154,7 +153,7 @@ if(!options.overembed) options.overembed = {};
         const embed = new MessageEmbed()
         .setColor(this.options.embed.color)
         .setTitle(this.options.embed.title)
-        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.lvl / 10}`);
+        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.score / 2}`);
 
 
         const up = new MessageButton().setEmoji(emojis.up).setStyle('PRIMARY').setCustomId('snake_up')
@@ -186,7 +185,7 @@ if(!options.overembed) options.overembed = {};
 
         const moveEmbed = new MessageEmbed()
         .setColor(this.options.embed.color)
-        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.lvl / 10}`);
+        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.score / 2}`);
 
         msg.edit({ embeds: [moveEmbed], components: msg.components }) 
     }
@@ -195,9 +194,9 @@ if(!options.overembed) options.overembed = {};
     async gameOver(msg) {
         this.isInGame = false;
         const editEmbed = new MessageEmbed()
-        .setColor(this.options.embed.overcolor)
-        .setTitle('**' + this.options.embed.overTitle + '**')
-        .setDescription('**' + this.options.embed.overMsg + '**')
+        .setColor(this.options.overembed.overcolor)
+        .setTitle('**' + this.options.overembed.overTitle + '**')
+        .setDescription('**' + this.options.overembed.overMsg + '**')
         .setThumbnail(this.options.overembed.overth);
 
         return await msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) })
