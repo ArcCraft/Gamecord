@@ -17,11 +17,9 @@ module.exports = class SnakeGame {
         if (typeof options.embed.title !== 'string')  throw new TypeError('INVALID_TITLE: Embed Title must be a string.')
         if (!options.embed.color) options.embed.color = '#5865F2';
         if (typeof options.embed.color !== 'string')  throw new TypeError('INVALID_COLOR: Embed Color must be a string.')
-        if (!options.embed.overTitle) options.embed.overTitle = 'Game Over';
-        if (typeof options.embed.overTitle !== 'string')  throw new TypeError('INVALID_OVER_TITLE: Over Title must be a string.')
-        if(!options.embed.overMsg) options.embed.overMsg = "You are lose in snake game";
-        // Other : overcolor
 
+if(!options.overembed) options.overembed = {};
+// overTitle - overMsg - overcolor - overth 
         if (!options.snake) options.snake = {};
         if (!options.snake.head) options.snake.head = '🟢';
         if (typeof options.snake.head !== 'string')  throw new TypeError('INVALID_EMOJI: Snake Head Emoji must be a string.')
