@@ -181,7 +181,7 @@ if(!options.overembed) options.overembed = {};
             this.score += 1;
             this.snakeLength++;
             this.newFoodLoc();
-            this.lvl = score / 10;
+            this.lvl = this.score / 10;
         }
 
         const moveEmbed = new MessageEmbed()
