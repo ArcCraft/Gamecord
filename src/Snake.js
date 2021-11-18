@@ -133,7 +133,7 @@ if(!options.overembed) options.overembed = {};
 
     async sendMessage(content) {
 		if (this.options.slash_command) return await this.message.editReply(content)
-		return await this.reply(content)
+		return await this.message.reply(content)
 	}
     
 
