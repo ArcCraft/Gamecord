@@ -133,7 +133,7 @@ if(!options.overembed) options.overembed = {};
 
     async sendMessage(content) {
 		if (this.options.slash_command) return await this.message.editReply(content)
-		return await this.message.channel.send(content)
+		return await this.reply(content)
 	}
     
 
@@ -153,7 +153,7 @@ if(!options.overembed) options.overembed = {};
         const embed = new MessageEmbed()
         .setColor(this.options.embed.color)
         .setTitle(this.options.embed.title)
-        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.score / 2.5}`);
+        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.lvl}`);
 
 
         const up = new MessageButton().setEmoji(emojis.up).setStyle('PRIMARY').setCustomId('snake_up')
@@ -181,11 +181,12 @@ if(!options.overembed) options.overembed = {};
             this.score += 1;
             this.snakeLength++;
             this.newFoodLoc();
+            this.lvl = score / 10;
         }
 
         const moveEmbed = new MessageEmbed()
         .setColor(this.options.embed.color)
-        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.score / 2.5}`);
+        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.lvl}`);
 
         msg.edit({ embeds: [moveEmbed], components: msg.components }) 
     }
