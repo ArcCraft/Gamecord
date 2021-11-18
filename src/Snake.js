@@ -153,7 +153,7 @@ if(!options.overembed) options.overembed = {};
         const embed = new MessageEmbed()
         .setColor(this.options.embed.color)
         .setTitle(this.options.embed.title)
-        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.score / 2}`);
+        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.score / 2.5}`);
 
 
         const up = new MessageButton().setEmoji(emojis.up).setStyle('PRIMARY').setCustomId('snake_up')
@@ -185,7 +185,7 @@ if(!options.overembed) options.overembed = {};
 
         const moveEmbed = new MessageEmbed()
         .setColor(this.options.embed.color)
-        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.score / 2}`);
+        .setDescription(this.getGameBoard() + '\n' + `**🍎 ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.score / 2.5}`);
 
         msg.edit({ embeds: [moveEmbed], components: msg.components }) 
     }
