@@ -1,8 +1,9 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const { disableButtons } = require('../utils/utils');
+const ms = require('ms');
 
        const WIDTH = 17;
-       const HEIGHT = 17;
+       const HEIGHT = 18;
 
 module.exports = class SnakeGame {
     constructor(options = {}) {
@@ -180,7 +181,7 @@ if(!options.overembed) options.overembed = {};
             this.score += 1;
             this.snakeLength++;
             this.newFoodLoc();
-            this.lvl = parseInt(this.score / 3);
+            this.lvl = parseInt(this.score / 2);
         }
 
         const moveEmbed = new MessageEmbed()
@@ -207,7 +208,7 @@ if(!options.overembed) options.overembed = {};
         const filter = m => m;
         const collector = msg.createMessageComponentCollector({
             filter,
-            idle: 60000
+            idle: ms('1h')
         })
 
         collector.on('collect', async btn => {
