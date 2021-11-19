@@ -91,7 +91,7 @@ if(!options.overembed) options.overembed = {};
                             if (this.isInGame || this.score == HEIGHT * WIDTH)
                                 str += emojis.head;
                             else
-                                str += emojis.over; 
+                                str = this.options.over.head; 
 
                         }
                         else if (s === this.snake.length - 1) {
@@ -145,7 +145,6 @@ if(!options.overembed) options.overembed = {};
             this.message.author = this.message.user;
         }
         const emojis = this.options.emojis;
-
         this.isInGame = true;
         this.snakeLength = 1;
         this.snake = [{ x: 5, y: 5 }];
@@ -194,14 +193,17 @@ if(!options.overembed) options.overembed = {};
 
 
     async gameOver(msg) {
+        let overembed = new MessageEmbed()
+        .setColor(this.options.embed.color)
+        .setDescription(this.getGameBoard() + '\n' + `**${this.options.emojis.food} ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** 0`);
         let time = this.message.createdAt / 1000;
         this.isInGame = false;
         const editEmbed = new MessageEmbed()
         .setColor(this.options.overembed.overcolor)
-        .setTitle('**' + this.options.overembed.overTitle + '**')
-        .addField(`**${this.options.embed.scoretitle}**`, `${this.score}`)
-        .addField(`**${this.options.lvltitle}**`, `${this.lvl || '0'}`)
-        .addField(`**${this.options.overembed.timetitle}**`, `<t:${parseInt(time)}:R>!`)
+        .setTitle(this.options.overembed.overTitle)
+        .addField(`${this.options.embed.scoretitle}`, `${this.score}`)
+        .addField(`${this.options.lvltitle}`, `${this.lvl || '0'}`)
+        .addField(`${this.options.overembed.timetitle}`, `<t:${parseInt(time)}:R>`)
         .setThumbnail(this.options.overembed.overth);
 
         return await msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) })
