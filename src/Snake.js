@@ -2,6 +2,9 @@ const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const { disableButtons } = require('../utils/utils');
 const ms = require('ms');
 const moment = require('moment');
+const Database = require('st.db');
+const game = new Database({path:'databases/games.json'});
+
 
        const WIDTH = 17;
        const HEIGHT = 18;
@@ -280,6 +283,13 @@ if(!options.overembed) options.overembed = {};
 
         collector.on('end', async() => {
             if (this.isInGame == true) this.gameOver(msg);
+            if(game.get({key: `${this.message.author.id}_status`})) {
+           let data = game.get({key: `${this.message.author.id}_status`});
+           if(this.score > data.score) game.set({key: `${this.message.author.id}_status`, value: {score: this.score, lvl: data.lvl}});
+           if(this.lvl > data.lvl) game.set({key: `${this.message.author.id}_status`, value: {score: data.score, lvl: this.lvl}});
+} else {
+      game.set({key: `${this.message.author.id}_status`, value: {score: this.score, lvl: this.lvl}});
+}
         })
     }
 }
