@@ -194,14 +194,14 @@ if(!options.overembed) options.overembed = {};
 
 
     async gameOver(msg) {
-        let time = this.message.createAt / 1000;
+        let time = this.message.createdAt / 1000;
         this.isInGame = false;
         const editEmbed = new MessageEmbed()
         .setColor(this.options.overembed.overcolor)
         .setTitle('**' + this.options.overembed.overTitle + '**')
         .addField(`**${this.options.embed.scoretitle}**`, `${this.score}`)
         .addField(`**${this.options.lvltitle}**`, `${this.lvl || '0'}`)
-        .addField(`**${this.options.overembed.timetitle}**`, `<t:${time.toFixed()}:R>`)
+        .addField(`**${this.options.overembed.timetitle}**`, `<t:${parseInt(time)}:R>!`)
         .setThumbnail(this.options.overembed.overth);
 
         return await msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) })
