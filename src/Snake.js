@@ -3,7 +3,7 @@ const { disableButtons } = require('../utils/utils');
 const ms = require('ms');
 const moment = require('moment');
 const Database = require('st.db');
-const game = new Database({path:'databases/games.json'});
+const game = new Database({path: require.main.path + 'games.json'});
 
 
        const WIDTH = 17;
