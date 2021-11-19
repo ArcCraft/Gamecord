@@ -1,6 +1,7 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const { disableButtons } = require('../utils/utils');
 const ms = require('ms');
+const moment = require('moment');
 
        const WIDTH = 17;
        const HEIGHT = 18;
@@ -197,7 +198,9 @@ if(!options.overembed) options.overembed = {};
         const editEmbed = new MessageEmbed()
         .setColor(this.options.overembed.overcolor)
         .setTitle('**' + this.options.overembed.overTitle + '**')
-        .setDescription('**' + this.options.overembed.overMsg + '**')
+        .addField(`**${this.options.embed.scoretitle}**`, `${this.score}`)
+        .addField(`**${this.options.lvltitle}**`, `${this.lvl || '0`}`)
+        .addField(`**${this.options.overembed.timetitle}**`, `<t:${this.message.createAt}:R>`);
         .setThumbnail(this.options.overembed.overth);
 
         return await msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) })
