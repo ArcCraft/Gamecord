@@ -74,7 +74,7 @@ module.exports = class TicTacToe {
 
     sendMessage(content) {
         if (this.options.slash_command) return this.message.editReply(content)
-        else return this.message.channel.send(content)
+        else return this.message.reply(content)
     }
 
 
