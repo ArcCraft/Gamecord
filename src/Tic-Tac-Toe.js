@@ -84,8 +84,8 @@ module.exports = class TicTacToe {
             this.message.author = this.message.user;
         }
 
-        if (this.opponent.bot) return this.sendMessage('You can\'t play with bots!')
-       // if (this.opponent.id === this.message.author.id) return this.sendMessage('You cannot play with yourself!')
+        if (this.opponent.bot) return this.sendMessage(this.options.botsMessage)
+       // if (this.opponent.id === this.message.author.id) return this.sendMessage(this.options.yourselfMesssge)
 
         const check = await verify(this.options)
 
@@ -200,7 +200,7 @@ module.exports = class TicTacToe {
         .setDescription(this.options.embes.overMessage.replace('{result}', this.getResultText(result)));
 
 
-		return msg.edit({ embeds: [Embed], components: disableButtons(msg.components) })
+		return msg.edit({ embeds: [Embed], components: [null] })
     }
 
 	getChip() {
@@ -259,12 +259,12 @@ module.exports = class TicTacToe {
     
 	getResultText(result) {
         if (result.result === 'tie')
-            return this.options.drawMessage;
+            return this.options.drawMessage.replace('{opponent}', this.options.opponent);
         else if (result.result === 'timeout')
-            return this.options.gameEndMessage;
+            return this.options.gameEndMessage.replace('{opponent}', this.options.opponent);
         else if (result.result === 'error')
             return 'ERROR: ' + result.error;
         else
-            return this.options.winMessage.replace('{emoji}', result.emoji).replace('{winner}', result.name);
+            return this.options.winMessage.replace('{winner}', result.name);
     }
 }
