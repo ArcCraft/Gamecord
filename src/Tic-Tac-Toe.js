@@ -107,11 +107,16 @@ module.exports = class TicTacToe {
 
 
         const embed = new MessageEmbed()
-		.setTitle(`${this.message.author.username} vs. ${this.opponent.username}`)
-        .addField(this.options.statusTitle || 'Status', this.options.turnMessage
+		.setTitle(this.options.embed.title.replace(`{challenger}`, this.options.message.author).replace(`{opponent}`, this.opponent))
+                .setDescription(`${this.options.embed.description}`)
+                .setColor(this.options.embed.color)
+                // Thumbnail
+        /* 
+         .addField(this.options.statusTitle || 'Status', this.options.turnMessage
             .replace('{emoji}', this.getChip())
             .replace('{player}', this.xTurn ? this.message.author.tag : this.opponent.tag)
         )
+*/
         .setColor(this.options.embed.color)
 
         const row1 = new MessageActionRow()
@@ -133,10 +138,7 @@ module.exports = class TicTacToe {
 
 
         collector.on('collect', async btn => {            
-            if (btn.user.id !== this.message.author.id && btn.user.id !== this.opponent.id) {
-                const authors = this.message.author.tag + 'and' + this.opponent.tag;
-                return btn.reply({ content: this.options.othersMessage.replace('{author}', authors),  ephemeral: true })
-            }
+            if (btn.user.id !== this.message.author.id && btn.user.id !== this.opponent.id) return;
             
             const turn = this.xTurn ? this.message.author.id : this.opponent.id;
 
@@ -174,12 +176,9 @@ module.exports = class TicTacToe {
 				this.xTurn = !this.xTurn;
 
 				const replyEmbed = new MessageEmbed(msg.embeds[0])
-                .setFields([])
-                .addField(this.options.statusTitle || 'Status', this.options.turnMessage
-                    .replace('{emoji}', this.getChip())
-                    .replace('{player}', this.xTurn ? this.message.author.tag : this.opponent.tag)
-                )
-
+                .setTitle(this.options.embed.title.replace(`{challenger}`, this.options.message.author).replace(`{opponent}`, this.opponent))
+                .setDescription(`${this.options.embed.description}`)
+                .setColor(this.options.embed.color);
 				msg.edit({ embeds: [replyEmbed], components: msg.components })
 			}	            
         })
