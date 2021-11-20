@@ -187,7 +187,6 @@ module.exports = class TicTacToe {
         collector.on('end', async(c, r) => {
             if (r === 'idle' && this.inGame == true) this.gameOver({ result: 'timeout' }, msg)
         })
-
     }
 
 
@@ -266,5 +265,13 @@ module.exports = class TicTacToe {
             return 'ERROR: ' + result.error;
         else
             return this.options.winMessage.replace('{winner}', result.name);
+            let price = parseInt(this.options.price);
+            if(price < 1) return this.sendMessage(this.options.noPrice);
+            if(price) {
+           let winner = this.message.guild.members.cache.get(u => u.username === result.name);
+      // Wait
+           let winnerprofile = prof.get({key: winner.id});
+           
+}
     }
 }
