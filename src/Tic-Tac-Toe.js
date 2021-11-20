@@ -110,7 +110,7 @@ module.exports = class TicTacToe {
 		.setTitle(this.options.embed.title.replace(`{challenger}`, this.options.message.author).replace(`{opponent}`, this.opponent))
                 .setDescription(`${this.options.embed.description}`)
                 .setColor(this.options.embed.color)
-                // Thumbnail
+                .setThumbnail(this.xTurn ? this.message.author.avatarURL({dynamic: true}) : this.opponent.avatarURL({dynamic: true}));
         /* 
          .addField(this.options.statusTitle || 'Status', this.options.turnMessage
             .replace('{emoji}', this.getChip())
@@ -178,7 +178,8 @@ module.exports = class TicTacToe {
 				const replyEmbed = new MessageEmbed(msg.embeds[0])
                 .setTitle(this.options.embed.title.replace(`{challenger}`, this.options.message.author).replace(`{opponent}`, this.opponent))
                 .setDescription(`${this.options.embed.description}`)
-                .setColor(this.options.embed.color);
+                .setColor(this.options.embed.color)
+                .setThumbnail(this.xTurn ? this.message.author.avatarURL({dynamic: true}) : this.opponent.avatarURL({dynamic: true}));
 				msg.edit({ embeds: [replyEmbed], components: msg.components })
 			}	            
         })
