@@ -122,9 +122,9 @@ module.exports = class TicTacToe {
         const row2 = new MessageActionRow()
         const row3 = new MessageActionRow()
 
-        for (let i = 1; i < 4; i++) row1.addComponents(new MessageButton().setCustomId(`a${i}_TicTacToe`).setStyle('SECONDARY').setEmoji(this.options.blankEmoji))
-        for (let i = 1; i < 4; i++) row2.addComponents(new MessageButton().setCustomId(`b${i}_TicTacToe`).setStyle('SECONDARY').setEmoji(this.options.blankEmoji))
-        for (let i = 1; i < 4; i++) row3.addComponents(new MessageButton().setCustomId(`c${i}_TicTacToe`).setStyle('SECONDARY').setEmoji(this.options.blankEmoji))
+        for (let i = 1; i < 4; i++) row1.addComponents(new MessageButton().setCustomId(`a${i}_TicTacToe`).setStyle('SECONDARY').setLabel(this.options.blankEmoji))
+        for (let i = 1; i < 4; i++) row2.addComponents(new MessageButton().setCustomId(`b${i}_TicTacToe`).setStyle('SECONDARY').setLabel(this.options.blankEmoji))
+        for (let i = 1; i < 4; i++) row3.addComponents(new MessageButton().setCustomId(`c${i}_TicTacToe`).setStyle('SECONDARY').setLabel(this.options.blankEmoji))
 
 
         const msg = await this.sendMessage({ embeds: [embed], components: [row1, row2, row3]})
