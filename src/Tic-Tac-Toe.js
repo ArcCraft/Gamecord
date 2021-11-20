@@ -117,7 +117,6 @@ module.exports = class TicTacToe {
             .replace('{player}', this.xTurn ? this.message.author.tag : this.opponent.tag)
         )
 */
-        .setColor(this.options.embed.color)
 
         const row1 = new MessageActionRow()
         const row2 = new MessageActionRow()
