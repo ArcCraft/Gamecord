@@ -196,10 +196,10 @@ module.exports = class TicTacToe {
         const Embed = new MessageEmbed()
         .setColor(msg.embeds[0].color)
         .setTitle(this.options.embed.overTitle)
-        .setDescription(this.options.embes.overMessage.replace('{result}', this.getResultText(result)));
+        .setDescription(this.options.embed.overMessage.replace('{result}', this.getResultText(result)));
 
 
-		return msg.edit({ embeds: [Embed], components: [null] })
+		return msg.edit({ embeds: [Embed], components: [] })
     }
 
 	getChip() {
