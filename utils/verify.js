@@ -21,7 +21,7 @@ async function verify(options) {
     
     	let askMsg;
     	if (options.slash_command) askMsg = await message.editReply({ embeds: [askEmbed], components: [row] })
-        else askMsg = await message.channel.send({ embeds: [askEmbed], components: [row] })
+        else askMsg = await message.reply({ embeds: [askEmbed], components: [row] })
     
         const filter = (interaction) => interaction === interaction;
         const interaction = askMsg.createMessageComponentCollector({
