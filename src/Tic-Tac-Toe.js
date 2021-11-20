@@ -85,7 +85,7 @@ module.exports = class TicTacToe {
         }
 
         if (this.opponent.bot) return this.sendMessage(this.options.botsMessage)
-        if (this.opponent.id === this.message.author.id) return this.sendMessage(this.options.yourselfMessage)
+        // if (this.opponent.id === this.message.author.id) return this.sendMessage(this.options.yourselfMessage)
 
         const check = await verify(this.options)
 
@@ -264,14 +264,16 @@ module.exports = class TicTacToe {
         else if (result.result === 'error')
             return 'ERROR: ' + result.error;
         else
-            return this.options.winMessage.replace('{winner}', result.name);
+            return this.options.winMessage.replace('{winner}', result.username);
+/*
             let price = parseInt(this.options.price);
             if(price < 1) return this.sendMessage(this.options.noPrice);
             if(price) {
-           let winner = this.message.guild.members.cache.get(u => u.username === result.name);
-      // Wait
+            if(result.name !== this.opponent.username) 
+           
            let winnerprofile = prof.get({key: winner.id});
            
 }
+*/
     }
 }
