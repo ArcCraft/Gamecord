@@ -107,7 +107,7 @@ module.exports = class TicTacToe {
 
 
         const embed = new MessageEmbed()
-		.setTitle(this.options.embed.title.replace(`{challenger}`, this.options.message.author).replace(`{opponent}`, this.opponent))
+		.setTitle(this.options.embed.title.replace(`{challenger}`, this.options.message.author.username).replace(`{opponent}`, this.opponent.username))
                 .setDescription(`${this.options.embed.description.replace('{player}', this.xTurn ? this.message.author : this.opponent)}`)
                 .setColor(this.options.embed.color)
                 .setThumbnail(this.xTurn ? this.message.author.avatarURL({dynamic: true}) : this.opponent.avatarURL({dynamic: true}));
@@ -175,8 +175,8 @@ module.exports = class TicTacToe {
 				this.xTurn = !this.xTurn;
 
 				const replyEmbed = new MessageEmbed(msg.embeds[0])
-                .setTitle(this.options.embed.title.replace(`{challenger}`, this.options.message.author).replace(`{opponent}`, this.opponent))
-                .setDescription(`${this.options.embed.description}`)
+                .setTitle(this.options.embed.title.replace(`{challenger}`, this.options.message.author.username).replace(`{opponent}`, this.opponent.username))
+                .setDescription(`${this.options.embed.description.replace('{player}', this.xTurn ? this.message.author : this.opponent)}`)
                 .setColor(this.options.embed.color)
                 .setThumbnail(this.xTurn ? this.message.author.avatarURL({dynamic: true}) : this.opponent.avatarURL({dynamic: true}));
 				msg.edit({ embeds: [replyEmbed], components: msg.components })
@@ -196,8 +196,8 @@ module.exports = class TicTacToe {
 
         const Embed = new MessageEmbed()
         .setColor(msg.embeds[0].color)
-        .setTitle(`${this.message.author.username} vs ${this.opponent.username}`)
-        .addField(this.options.embed.overTitle, this.getResultText(result))
+        .setTitle(this.options.embed.overTitle)
+        .setDescription(this.options.embes.overMessage.replace('{result}', this.getResultText(result)));
 
 
 		return msg.edit({ embeds: [Embed], components: disableButtons(msg.components) })
