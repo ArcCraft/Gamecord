@@ -4,7 +4,7 @@ const { disableButtons } = require('../utils/utils');
 const verify = require('../utils/verify')
 const Database = require('st.db');
 const prof = new Database({path: `databases/profile.json`})
-
+const ms = require('ms');
 const NO_MOVE = 0; 
 const PLAYER_1 = 1;
 const PLAYER_2 = 2;
@@ -134,7 +134,7 @@ module.exports = class TicTacToe {
         const filter = m => m;
         const collector = msg.createMessageComponentCollector({
             filter,
-            idle: 60000
+            idle: ms('1h')
         })
 
 
