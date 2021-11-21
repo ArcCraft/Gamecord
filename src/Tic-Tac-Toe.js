@@ -188,6 +188,16 @@ module.exports = class TicTacToe {
 
         collector.on('end', async(c, r) => {
             if (r === 'idle' && this.inGame == true) this.gameOver({ result: 'timeout' }, msg)
+            let price = parseInt(this.options.price);
+            if(price < 1) return this.sendMessage(this.options.noPrice);
+            if(price) {
+           let winnerprofile = prof.get({key: result.id});
+           let loserprofile = prof.get({key: result.loser.id});
+           prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
+           prof.set({key: result.loser.id, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
+} else {
+  throw new Error('Price is not selected');
+}
         })
     }
 
@@ -267,15 +277,5 @@ module.exports = class TicTacToe {
             return 'ERROR: ' + result.error;
         else
             return this.options.winMessage.replace('{winner}', result.name);
-            let price = parseInt(this.options.price);
-            if(price < 1) return this.sendMessage(this.options.noPrice);
-            if(price) {
-           let winnerprofile = prof.get({key: result.id});
-           let loserprofile = prof.get({key: result.loser.id});
-           prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
-           prof.set({key: result.loser.id, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
-} else {
-  throw new Error('Price is not selected');
-}
     }
 }
