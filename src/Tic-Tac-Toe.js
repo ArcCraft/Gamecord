@@ -188,16 +188,6 @@ module.exports = class TicTacToe {
 
         collector.on('end', async(c, r) => {
             if (r === 'idle' && this.inGame == true) this.gameOver({ result: 'timeout' }, msg)
-            let price = parseInt(this.options.price);
-            if(price < 1) return this.sendMessage(this.options.noPrice);
-            if(price) {
-           let winnerprofile = prof.get({key: result.id});
-           let loserprofile = prof.get({key: result.loser.id});
-           prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
-           prof.set({key: result.loser.id, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
-} else {
-  throw new Error('Price is not selected');
-}
         })
     }
 
@@ -209,9 +199,14 @@ module.exports = class TicTacToe {
         .setColor(msg.embeds[0].color)
         .setTitle(this.options.embed.overTitle)
         .setDescription(this.options.embed.overMessage.replace('{result}', this.getResultText(result)));
-
-
 		return msg.edit({ embeds: [Embed], components: [] })
+            let price = parseInt(this.options.price);
+            if(price < 1) return this.sendMessage(this.options.noPrice);
+            if(price) {
+           let winnerprofile = prof.get({key: result.id});
+           let loserprofile = prof.get({key: result.loser.id});
+           prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
+           prof.set({key: result.loser.id, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
     }
 
 	getChip() {
