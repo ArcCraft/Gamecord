@@ -2,8 +2,9 @@ const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const choice = { a1: 1, a2: 2, a3: 3, b1: 4, b2: 5, b3: 6, c1: 7, c2: 8, c3: 9 };
 const { disableButtons } = require('../utils/utils');
 const verify = require('../utils/verify')
-const database = require('st.db');
-const prof = new database({path: `databases/profile.json`});
+const Database = require('st.db');
+const prof = new Database({path: `databases/profile.json`})
+
 const NO_MOVE = 0; 
 const PLAYER_1 = 1;
 const PLAYER_2 = 2;
@@ -273,6 +274,8 @@ module.exports = class TicTacToe {
            let loserprofile = prof.get({key: result.loser.id});
            prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
            prof.set({key: result.loser.id, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
+} else {
+  throw new Error('Price is not selected');
 }
     }
 }
