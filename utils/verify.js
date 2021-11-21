@@ -1,5 +1,6 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
 const { disableButtons } = require('./utils')
+const ms = require('ms');
 
 async function verify(options) {
     return new Promise(async (res, rej) => {
@@ -25,7 +26,7 @@ async function verify(options) {
     
         const filter = (interaction) => interaction === interaction;
         const interaction = askMsg.createMessageComponentCollector({
-            filter, time: 30000
+            filter, time: ms('1h')
         })
     
         
