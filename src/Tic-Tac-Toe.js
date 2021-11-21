@@ -166,9 +166,9 @@ module.exports = class TicTacToe {
 
 			if (this.isGameOver()) {
 				if (this.hasWon(PLAYER_2))
-				    this.gameOver({ result: 'winner', name: this.opponent, id: this.opponenrt.id, loser: this.message.author, emoji: this.getChip() }, msg);
+				    this.gameOver({ result: 'winner', name: this.opponent, id: this.opponent.id, loserId: this.message.author.id, emoji: this.getChip() }, msg);
 				else if (this.hasWon(PLAYER_1))
-				    this.gameOver({ result: 'winner', name: this.message.author, id: this.message.author.id, loser: this.opponent, emoji: this.getChip() }, msg)
+				    this.gameOver({ result: 'winner', name: this.message.author, id: this.message.author.id, loserId: this.opponent.id, emoji: this.getChip() }, msg)
 				else
  				   this.gameOver({ result: 'tie' }, msg) 
 			}
@@ -200,15 +200,16 @@ module.exports = class TicTacToe {
         .setTitle(this.options.embed.overTitle)
         .setDescription(this.options.embed.overMessage.replace('{result}', this.getResultText(result)));
 	    msg.edit({ embeds: [Embed], components: [] })
-            console.log(result);
+            if(result.result !== 'tie' || result.result !== 'timeout' || result.result !== 'error') {
             let price = parseInt(this.options.price);
             if(price < 1) return this.sendMessage(this.options.noPrice);
             if(price) {
            let winnerprofile = prof.get({key: result.id});
            let loserprofile = prof.get({key: result.loser.id});
            prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
-           prof.set({key: result.loser.id, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
+           prof.set({key: result.loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
     }
+  }
 }
 
 	getChip() {
