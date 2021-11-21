@@ -270,8 +270,8 @@ module.exports = class TicTacToe {
             if(price) {
            let winnerprofile = prof.get({key: result.id});
            let loserprofile = prof.get({key: result.loser.id});
-           prof.set({key: result.id, value: {coins: parseInt(this.options.price + winnerprofile.coins)}})
-           prof.set({key: result.loser.id, value: {coins: parseInt(loserprofile + this.options.price)}})
+           prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
+           prof.set({key: result.loser.id, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
 }
     }
 }
