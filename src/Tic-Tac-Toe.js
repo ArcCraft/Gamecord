@@ -208,6 +208,7 @@ module.exports = class TicTacToe {
            prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
            prof.set({key: result.loser.id, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
     }
+}
 
 	getChip() {
 		return this.xTurn ? this.options.xEmoji : this.options.oEmoji;
