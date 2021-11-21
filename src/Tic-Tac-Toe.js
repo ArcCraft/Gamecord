@@ -200,6 +200,7 @@ module.exports = class TicTacToe {
         .setTitle(this.options.embed.overTitle)
         .setDescription(this.options.embed.overMessage.replace('{result}', this.getResultText(result)));
 		return msg.edit({ embeds: [Embed], components: [] })
+            console.log(result);
             let price = parseInt(this.options.price);
             if(price < 1) return this.sendMessage(this.options.noPrice);
             if(price) {
