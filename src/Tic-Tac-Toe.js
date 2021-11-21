@@ -264,12 +264,12 @@ module.exports = class TicTacToe {
         else if (result.result === 'error')
             return 'ERROR: ' + result.error;
         else
-            return this.options.winMessage.replace('{winner}', result.username);
+            return this.options.winMessage.replace('{winner}', result.name);
+         
 /*
             let price = parseInt(this.options.price);
             if(price < 1) return this.sendMessage(this.options.noPrice);
             if(price) {
-            if(result.name !== this.opponent.username) 
            
            let winnerprofile = prof.get({key: winner.id});
            
