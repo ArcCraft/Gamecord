@@ -186,8 +186,8 @@ module.exports = class RPSGame {
         .setTitle(this.options.embed.title)
         .setColor(this.options.embed.color)
         .setDescription(result)
-        .addField(this.message.author.username, challenger, true)
-        .addField(this.opponent.username, opponent, true);
+        .addField(this.message.author.tag, challenger, true)
+        .addField(this.opponent.tag, opponent, true);
 
 
         return msg.edit({ embeds: [finalEmbed], components: disableButtons(msg.components) })
