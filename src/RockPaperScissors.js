@@ -74,7 +74,7 @@ module.exports = class RPSGame {
 
     sendMessage(content) {
         if (this.options.slash_command) return this.message.editReply(content)
-        else return this.message.channel.send(content)
+        else return this.message.reply(content)
     }
 
 
@@ -125,12 +125,7 @@ module.exports = class RPSGame {
 
 
         collector.on('collect', async btn => {
-            if (btn.user.id !== this.message.author.id && btn.user.id !== this.opponent.id) {
-                const authors = this.message.author.tag + 'and' + this.opponent.tag;
-                return btn.reply({ content: this.options.othersMessage.replace('{author}', authors),  ephemeral: true })
-            }
-
-
+            if (btn.user.id !== this.message.author.id && btn.user.id !== this.opponent.id) return;
             if (btn.user.id == this.message.author.id) {
                 if (challenger_choice) {
                     return btn.reply({ content: this.options.noChangeMessage,  ephemeral: true })
@@ -164,8 +159,7 @@ module.exports = class RPSGame {
                 const endEmbed = new MessageEmbed()
                 .setTitle(this.options.embed.title)
                 .setColor(this.options.embed.color)
-                .setDescription(this.options.gameEndMessage)
-                .setTimestamp()
+                .setDescription(this.options.gameEndMessage);
 
                 return msg.edit({ embeds: [endEmbed], components: disableButtons(msg.components) })
             }
@@ -193,8 +187,7 @@ module.exports = class RPSGame {
         .setColor(this.options.embed.color)
         .setDescription(result)
         .addField(this.message.author.username, challenger, true)
-        .addField(this.opponent.username, opponent, true)
-        .setTimestamp()
+        .addField(this.opponent.username, opponent, true);
 
 
         return msg.edit({ embeds: [finalEmbed], components: disableButtons(msg.components) })
