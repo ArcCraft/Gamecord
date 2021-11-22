@@ -109,7 +109,7 @@ module.exports = class RPSGame {
 
         const rock = new MessageButton().setCustomId('r_rps').setStyle('PRIMARY').setLabel(this.options.buttons.rock).setEmoji(emojis.rock)
         const paper = new MessageButton().setCustomId('p_rps').setStyle('PRIMARY').setLabel(this.options.buttons.paper).setEmoji(emojis.paper)
-        const scissors = new MessageButton().setCustomId('s_rps').setStyle('PRIMARY').setLabel(this.options.buttons.scissors).setEmoji(emojis.scissors)
+        const scissors = new MessageButton().setCustomId('s_rps').setStyle('SECONDARY').setLabel(this.options.buttons.scissors).setEmoji(emojis.scissors)
         const row = new MessageActionRow().addComponents(rock, paper, scissors)
 
         const msg = await this.sendMessage({ embeds: [embed], components: [row] })
@@ -120,7 +120,7 @@ module.exports = class RPSGame {
         const filter = m => m;
         const collector = msg.createMessageComponentCollector({
             filter,
-            time: 60000,
+            time: ms('1h'),
         }) 
 
 
@@ -157,7 +157,7 @@ module.exports = class RPSGame {
         collector.on('end', async(c, r) => {
             if (r === 'time' && this.inGame == true) {
                 const endEmbed = new MessageEmbed()
-                .setTitle(this.options.embed.Overtitle)
+                .setTitle(this.options.embed.endTitle)
                 .setColor(this.options.embed.color)
                 .setDescription(this.options.gameEndMessage);
 
@@ -179,10 +179,10 @@ module.exports = class RPSGame {
             (opponent === rock && challenger === scissors) || 
             (opponent === paper && challenger === rock)
         ) {
-            result = this.options.winMessage.replace('{winner}', this.opponent.toString())
+            result = this.options.winMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
             title = this.options.winTitle;
         } else {
-            result = this.options.winMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, )
+            result = this.options.winMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
             title = this.options.winTitle.replace('{winner}', this.message.author.username);
         }
 
