@@ -104,7 +104,7 @@ module.exports = class RPSGame {
         const embed = new MessageEmbed()
 		.setTitle(this.options.embed.title)
  		.setDescription(this.options.embed.description)
-        .setColor(this.options.embed.color)
+        .setColor(this.options.embed.color);
         
 
         const rock = new MessageButton().setCustomId('r_rps').setStyle('PRIMARY').setLabel(this.options.buttons.rock).setEmoji(emojis.rock)
@@ -157,7 +157,7 @@ module.exports = class RPSGame {
         collector.on('end', async(c, r) => {
             if (r === 'time' && this.inGame == true) {
                 const endEmbed = new MessageEmbed()
-                .setTitle(this.options.embed.title)
+                .setTitle(this.options.embed.Overtitle)
                 .setColor(this.options.embed.color)
                 .setDescription(this.options.gameEndMessage);
 
@@ -168,26 +168,28 @@ module.exports = class RPSGame {
 
     getResult(msg, challenger, opponent) {
         let result;
+        let title;
         const { rock, paper, scissors } = this.options.emojis;
 
         if (challenger === opponent) {
             result = this.options.drawMessage;
+            title = this.options.embed.drawTitle;
         } else if (
             (opponent === scissors && challenger === paper) || 
             (opponent === rock && challenger === scissors) || 
             (opponent === paper && challenger === rock)
         ) {
             result = this.options.winMessage.replace('{winner}', this.opponent.toString())
+            title = this.options.winTitle;
         } else {
-            result = this.options.winMessage.replace('{winner}', this.message.author.toString())
+            result = this.options.winMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, )
+            title = this.options.winTitle.replace('{winner}', this.message.author.username);
         }
 
         const finalEmbed = new MessageEmbed()
-        .setTitle(this.options.embed.title)
+        .setTitle(title)
         .setColor(this.options.embed.color)
-        .setDescription(result)
-        .addField(this.message.author.tag, challenger, true)
-        .addField(this.opponent.tag, opponent, true);
+        .setDescription(result);
 
 
         return msg.edit({ embeds: [finalEmbed], components: disableButtons(msg.components) })
