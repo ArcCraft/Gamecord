@@ -180,7 +180,7 @@ module.exports = class RPSGame {
             (opponent === paper && challenger === rock)
         ) {
             result = this.options.winMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
-            title = this.options.winTitle.replace('{winner}', this.message.author.username);
+            title = this.options.winTitle.replace('{winner}', this.opponent.username);
         } else {
             result = this.options.winMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
             title = this.options.winTitle.replace('{winner}', this.message.author.username);
