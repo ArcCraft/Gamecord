@@ -1,7 +1,7 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const { disableButtons } = require('../utils/utils')
 const verify = require('../utils/verify')
-
+const ms = reqiire('ms');
 
 module.exports = class RPSGame {
     constructor(options = {}) {
@@ -180,7 +180,7 @@ module.exports = class RPSGame {
             (opponent === paper && challenger === rock)
         ) {
             result = this.options.winMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
-            title = this.options.winTitle;
+            title = this.options.winTitle.replace('{winner}', this.message.author.username);
         } else {
             result = this.options.winMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
             title = this.options.winTitle.replace('{winner}', this.message.author.username);
