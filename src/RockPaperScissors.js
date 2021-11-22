@@ -109,7 +109,7 @@ module.exports = class RPSGame {
 
         const rock = new MessageButton().setCustomId('r_rps').setStyle('PRIMARY').setLabel(this.options.buttons.rock).setEmoji(emojis.rock)
         const paper = new MessageButton().setCustomId('p_rps').setStyle('PRIMARY').setLabel(this.options.buttons.paper).setEmoji(emojis.paper)
-        const scissors = new MessageButton().setCustomId('s_rps').setStyle('SECONDARY').setLabel(this.options.buttons.scissors).setEmoji(emojis.scissors)
+        const scissors = new MessageButton().setCustomId('s_rps').setStyle('PRIMARY').setLabel(this.options.buttons.scissors).setEmoji(emojis.scissors)
         const row = new MessageActionRow().addComponents(rock, paper, scissors)
 
         const msg = await this.sendMessage({ embeds: [embed], components: [row] })
