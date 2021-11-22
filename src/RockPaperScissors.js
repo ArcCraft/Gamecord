@@ -1,7 +1,9 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const { disableButtons } = require('../utils/utils')
 const verify = require('../utils/verify')
-const ms = reqiire('ms');
+const Database = require('st.db');
+const prof = new Database({path: `databases/profile.json`})
+const ms = require('ms');
 
 module.exports = class RPSGame {
     constructor(options = {}) {
