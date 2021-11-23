@@ -171,11 +171,15 @@ module.exports = class RPSGame {
     getResult(msg, challenger, opponent) {
         let result;
         let title;
+        let id;
+        let loserId;
         const { rock, paper, scissors } = this.options.emojis;
 
         if (challenger === opponent) {
             result = this.options.drawMessage;
             title = this.options.embed.drawTitle;
+            loserId = null;
+            id = null;
         } else if (
             (opponent === scissors && challenger === paper) || 
             (opponent === rock && challenger === scissors) || 
@@ -183,9 +187,13 @@ module.exports = class RPSGame {
         ) {
             result = this.options.winMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
             title = this.options.winTitle.replace('{winner}', this.opponent.username);
+            loserId = this.message.author.id;
+            id = this.opponent.id;
         } else {
             result = this.options.winMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
             title = this.options.winTitle.replace('{winner}', this.message.author.username);
+            loserId = this.opponent.id;
+            id = this.message.author.id;
         }
 
         const finalEmbed = new MessageEmbed()
@@ -195,11 +203,11 @@ module.exports = class RPSGame {
         msg.edit({ embeds: [finalEmbed], components: disableButtons(msg.components) })
         let price = parseInt(this.options.price);
             if(price < 1) return this.sendMessage(this.options.noPrice);
-            if(price) {
-           let winnerprofile = prof.get({key: result.id});
-           let loserprofile = prof.get({key: result.loserId});
-           prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
-           prof.set({key: result.loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
+            if(price && id !== null && loserId !== null) {
+           let winnerprofile = prof.get({key: id});
+           let loserprofile = prof.get({key: loserId});
+           prof.set({key: id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
+           prof.set({key: loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
        }
     }
 }
