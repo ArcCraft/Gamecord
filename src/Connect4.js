@@ -102,7 +102,7 @@ module.exports = class Connect4Game {
     async Connect4Game() {
         for (let y = 0; y < HEIGHT; y++) {
             for (let x = 0; x < WIDTH; x++) {
-                this.gameBoard[y * WIDTH + x] = '⚪';
+                this.gameBoard[y * WIDTH + x] = this.options.emojis.board;
             }
         }
         this.inGame = true;
@@ -135,7 +135,6 @@ module.exports = class Connect4Game {
         .setTitle(this.options.embed.title)
         .setDescription(this.getGameBoard())
         .addField(this.options.embed.statusTitle || 'Status', status)
-        .setFooter(`${this.message.author.username} vs ${this.opponent.username}`, this.message.guild.iconURL({ dynamic: true }))
     } 
 
 
@@ -147,7 +146,6 @@ module.exports = class Connect4Game {
         .setTitle(this.options.embed.title)
         .setDescription(this.getGameBoard())
         .addField(this.options.embed.statusTitle || 'Status', this.getResultText(result))
-        .setFooter(`${this.message.author.username} vs ${this.opponent.username}`, this.message.guild.iconURL({ dynamic: true }))
         
 
         return msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) });
@@ -181,7 +179,7 @@ module.exports = class Connect4Game {
 
             for (let y = HEIGHT - 1; y >= 0; y--) {
                 const chip = this.gameBoard[column + (y * WIDTH)];
-                if (chip === '⚪') {
+                if (chip === this.options.emojis.board) {
                     this.gameBoard[column + (y * WIDTH)] = this.getChip();
                     placedX = column;
                     placedY = y;
