@@ -115,7 +115,8 @@ module.exports = class Connect4Game {
         const btn5 = new MessageButton().setStyle('PRIMARY').setEmoji('5️⃣').setCustomId('5_connect4')
         const btn6 = new MessageButton().setStyle('PRIMARY').setEmoji('6️⃣').setCustomId('6_connect4')
         const btn7 = new MessageButton().setStyle('PRIMARY').setEmoji('7️⃣').setCustomId('7_connect4')
-
+        const btn8 = new MessageButton().setStyle('PRIMARY').setEmoji('8️⃣').setCustomId('8_connect4')
+        const btn9 = new MessageButton().setStyle('PRIMARY').setEmoji('9️⃣').setCustomId('9_connect4')
         const row1 = new MessageActionRow().addComponents(btn1, btn2, btn3, btn4)
         const row2 = new MessageActionRow().addComponents(btn5, btn6, btn7)
 
