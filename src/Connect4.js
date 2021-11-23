@@ -2,8 +2,8 @@ const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
 const { disableButtons } = require('../utils/utils')
 const verify = require('../utils/verify')
  
-const WIDTH = 7;
-const HEIGHT = 6;
+const WIDTH = 10;
+const HEIGHT = 9;
 
 module.exports = class Connect4Game {
     constructor(options = {}) {
@@ -72,7 +72,7 @@ module.exports = class Connect4Game {
             }
             str += '\n';
         }
-        str += '1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣'
+        str += '1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣'
         return str;
     }
 
@@ -143,7 +143,7 @@ module.exports = class Connect4Game {
 
         const editEmbed = new MessageEmbed()
         .setColor(this.options.embed.color)
-        .setTitle(this.options.embed.title)
+        .setTitle(this.options.embed.overTitle)
         .setDescription(this.getGameBoard())
         .addField(this.options.embed.statusTitle || 'Status', this.getResultText(result))
         
