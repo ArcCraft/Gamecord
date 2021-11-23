@@ -172,10 +172,7 @@ module.exports = class Connect4Game {
 
 
         collector.on('collect', async btn => {
-            if (btn.user.id !== this.message.author.id && btn.user.id !== this.opponent.id) {
-                const authors = this.message.author.tag + 'and' + this.opponent.tag;
-                return btn.reply({ content: this.options.othersMessage.replace('{author}', authors),  ephemeral: true })
-            }
+            if (btn.user.id !== this.message.author.id && btn.user.id !== this.opponent.id) return;
             
             const turn = this.redTurn ? this.message.author.id : this.opponent.id;
             if (btn.user.id !== turn) {
@@ -212,7 +209,7 @@ module.exports = class Connect4Game {
             if (this.hasWon(placedX, placedY)) {
                 let players;
                 if(btn.user.id === this.message.author.id) players = {loser: this.opponent, winner: this.message.author};
-                if(btn.user.id === this.opponent.id) players = {loser: this.message.author, winner = this.opponent};
+                if(btn.user.id === this.opponent.id) players = {loser: this.message.author, winner: this.opponent};
                 this.gameOver({ result: 'winner', players: players, emoji: this.getChip()}, msg);
             }
             else if (this.isBoardFull()) {
