@@ -72,7 +72,7 @@ module.exports = class Connect4Game {
             }
             str += '\n';
         }
-        str += '1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣'
+        str += '1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟'
         return str;
     }
 
@@ -117,11 +117,12 @@ module.exports = class Connect4Game {
         const btn7 = new MessageButton().setStyle('PRIMARY').setEmoji('7️⃣').setCustomId('7_connect4')
         const btn8 = new MessageButton().setStyle('PRIMARY').setEmoji('8️⃣').setCustomId('8_connect4')
         const btn9 = new MessageButton().setStyle('PRIMARY').setEmoji('9️⃣').setCustomId('9_connect4')
+        const btn10 = new MessageButton().setStyle('PRIMARY').setEmoji('🔟').setCustomId('10_connect4')
         const row1 = new MessageActionRow().addComponents(btn1, btn2, btn3, btn4)
-        const row2 = new MessageActionRow().addComponents(btn5, btn6, btn7)
+        const row2 = new MessageActionRow().addComponents(btn5, btn6, btn7, btn8)
+        const row3 = new MessageActionRow().addComponents(btn9, btn10)
 
-
-        const msg = await this.sendMessage({ embeds: [this.GameEmbed()], components: [row1, row2] })
+        const msg = await this.sendMessage({ embeds: [this.GameEmbed()], components: [row1, row2, row3] })
 
         this.ButtonInteraction(msg);  
     }
