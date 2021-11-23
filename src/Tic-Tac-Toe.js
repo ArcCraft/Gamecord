@@ -87,7 +87,7 @@ module.exports = class TicTacToe {
         }
 
         if (this.opponent.bot) return this.sendMessage(this.options.botsMessage)
-        // if (this.opponent.id === this.message.author.id) return this.sendMessage(this.options.yourselfMessage)
+        if (this.opponent.id === this.message.author.id) return this.sendMessage(this.options.yourselfMessage)
 
         const check = await verify(this.options)
 
