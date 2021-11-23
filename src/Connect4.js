@@ -266,7 +266,7 @@ module.exports = class Connect4Game {
     isBoardFull() {
         for (let y = 0; y < HEIGHT; y++)
             for (let x = 0; x < WIDTH; x++)
-                if (this.gameBoard[y * WIDTH + x] === '⚪')
+                if (this.gameBoard[y * WIDTH + x] === this.options.emojis.board)
                     return false;
         return true;
     }
