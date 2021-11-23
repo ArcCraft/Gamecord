@@ -1,7 +1,10 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
 const { disableButtons } = require('../utils/utils')
 const verify = require('../utils/verify')
- 
+const Database = require('st.db');
+const prof = new Database({path: `databases/profile.json`})
+const ms = require('ms');
+
 const WIDTH = 10;
 const HEIGHT = 9;
 
@@ -78,7 +81,7 @@ module.exports = class Connect4Game {
 
     sendMessage(content) {
         if (this.options.slash_command) return this.message.editReply(content)
-        else return this.message.channel.send(content)
+        else return this.message.reply(content)
     }
 
 
@@ -164,7 +167,7 @@ module.exports = class Connect4Game {
     
     ButtonInteraction(msg) {
         const collector = msg.createMessageComponentCollector({
-            idle: 60000,
+            idle: ms('1h'),
         })
 
 
