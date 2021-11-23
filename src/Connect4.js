@@ -148,10 +148,18 @@ module.exports = class Connect4Game {
         .setTitle(this.options.embed.overTitle)
         .setDescription(this.getGameBoard())
         .addField(this.options.embed.statusTitle || 'Status', this.getResultText(result))
-        
-
-        return msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) });
+         msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) });
+        if(result.result !== 'tie' || result.result !== 'timeout' || result.result !== 'error') {
+            let price = parseInt(this.options.price);
+            if(price < 1) return this.sendMessage(this.options.noPrice);
+            if(price) {
+           let winnerprofile = prof.get({key: result.players.winner.id});
+           let loserprofile = prof.get({key: result.players.loser.id});
+           prof.set({key: result.players.winner.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
+           prof.set({key: result.players.loser.id, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
+      }
     }
+  }
 
     
     ButtonInteraction(msg) {
@@ -199,7 +207,10 @@ module.exports = class Connect4Game {
 
 
             if (this.hasWon(placedX, placedY)) {
-                this.gameOver({ result: 'winner', name: btn.user.tag, emoji: this.getChip() }, msg);
+                let players;
+                if(btn.user.id === this.message.author.id) players = {loser: this.opponent, winner: this.message.author};
+                if(btn.user.id === this.opponent.id) players = {loser: this.message.author, winner = this.opponent};
+                this.gameOver({ result: 'winner', players: players, emoji: this.getChip()}, msg);
             }
             else if (this.isBoardFull()) {
                 this.gameOver({ result: 'tie' }, msg);
