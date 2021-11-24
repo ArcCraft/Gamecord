@@ -61,7 +61,7 @@ module.exports = class TicTacToe {
         if (typeof options.winMessage !== 'string')  throw new TypeError('WIN_MESSAGE: Win Message must be a string.')
         if (!options.drawMessage) options.drawMessage = 'It was a draw!';
         if (typeof options.drawMessage !== 'string')  throw new TypeError('DRAW_MESSAGE: Draw Message must be a string.')
-
+        const prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: options.password}});
         
 		this.options = options;
         this.message = options.message;
@@ -71,8 +71,6 @@ module.exports = class TicTacToe {
 		this.xTurn = true;
 		// xTurn => author, oTurn => opponent 
     }
-
-    const prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: this.options.password}});
     sendMessage(content) {
         if (this.options.slash_command) return this.message.editReply(content)
         else return this.message.reply(content)
