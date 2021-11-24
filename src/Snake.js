@@ -3,8 +3,6 @@ const { disableButtons } = require('../utils/utils');
 const ms = require('ms');
 const moment = require('moment');
 const Database = require('st.db');
-const game = new Database({path: 'databases/games.json'});
-
 
        const WIDTH = 17;
        const HEIGHT = 18;
@@ -58,7 +56,7 @@ if(!options.overembed) options.overembed = {};
         if (!options.stopButton) options.stopButton = 'Stop';
         if (typeof options.stopButton !== 'string') throw new TypeError('INVALID_STOP_BUTTON: Stop Button must be a string.')
         // Other : scoretitle,
-
+        
         this.snake = [{ x: 5, y: 5 }];
         this.apple = { x: 1, y: 1 };
         this.snakeLength = 1;
@@ -73,7 +71,7 @@ if(!options.overembed) options.overembed = {};
             }
         }
     }
-
+    const game = new Database({path: 'databases/games.json', crypto: {encrypt:true, password: this.options.password}});
     getGameBoard() {
         let str = '';
         let emojis =  this.options.snake;
