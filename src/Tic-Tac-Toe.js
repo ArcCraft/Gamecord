@@ -3,7 +3,6 @@ const choice = { a1: 1, a2: 2, a3: 3, b1: 4, b2: 5, b3: 6, c1: 7, c2: 8, c3: 9 }
 const { disableButtons } = require('../utils/utils');
 const verify = require('../utils/verify')
 const Database = require('st.db');
-const prof = new Database({path: `databases/profile.json`})
 const ms = require('ms');
 const NO_MOVE = 0; 
 const PLAYER_1 = 1;
@@ -73,7 +72,7 @@ module.exports = class TicTacToe {
 		// xTurn => author, oTurn => opponent 
     }
 
-
+    const prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: this.options.password}});
     sendMessage(content) {
         if (this.options.slash_command) return this.message.editReply(content)
         else return this.message.reply(content)
