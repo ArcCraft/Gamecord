@@ -173,7 +173,7 @@ module.exports = class RPSGame {
         const { rock, paper, scissors } = this.options.emojis;
 
         if (challenger === opponent) {
-            result = this.options.message.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent);
+            result = this.options.ensMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent);
             title = this.options.embed.drawTitle;
             loserId = null;
             id = null;
