@@ -2,7 +2,6 @@ const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
 const { disableButtons } = require('../utils/utils')
 const verify = require('../utils/verify')
 const Database = require('st.db');
-const prof = new Database({path: `databases/profile.json`})
 const ms = require('ms');
 
 const WIDTH = 10;
@@ -78,7 +77,7 @@ module.exports = class Connect4Game {
         str += '1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟'
         return str;
     }
-
+    const prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: this.options.password}});
     sendMessage(content) {
         if (this.options.slash_command) return this.message.editReply(content)
         else return this.message.reply(content)
