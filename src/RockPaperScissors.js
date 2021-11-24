@@ -85,8 +85,8 @@ module.exports = class RPSGame {
             this.message.author = this.message.user;
         }
 
-        if (this.opponent.bot) return this.sendMessage('You can\'t play with bots!')
-        if (this.opponent.id === this.message.author.id) return this.sendMessage('You cannot play with yourself!')
+        if (this.opponent.bot) return this.sendMessage(this.options.botMessage)
+        if (this.opponent.id === this.message.author.id) return this.sendMessage(this.options.yourselfMessage)
 
         const check = await verify(this.options);
 
@@ -175,7 +175,7 @@ module.exports = class RPSGame {
         const { rock, paper, scissors } = this.options.emojis;
 
         if (challenger === opponent) {
-            result = this.options.drawMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent);
+            result = this.options.message.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent);
             title = this.options.embed.drawTitle;
             loserId = null;
             id = null;
@@ -184,12 +184,12 @@ module.exports = class RPSGame {
             (opponent === rock && challenger === scissors) || 
             (opponent === paper && challenger === rock)
         ) {
-            result = this.options.winMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
+            result = this.options.message.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
             title = this.options.winTitle.replace('{winner}', this.opponent.username);
             loserId = this.message.author.id;
             id = this.opponent.id;
         } else {
-            result = this.options.winMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
+            result = this.options.message.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
             title = this.options.winTitle.replace('{winner}', this.message.author.username);
             loserId = this.opponent.id;
             id = this.message.author.id;
