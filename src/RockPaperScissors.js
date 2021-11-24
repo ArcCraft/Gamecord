@@ -2,7 +2,6 @@ const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const { disableButtons } = require('../utils/utils')
 const verify = require('../utils/verify')
 const Database = require('st.db');
-const prof = new Database({path: `databases/profile.json`})
 const ms = require('ms');
 
 module.exports = class RPSGame {
@@ -73,7 +72,7 @@ module.exports = class RPSGame {
         this.message = options.message;
     }
 
-
+    const prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: this.options.password}});
     sendMessage(content) {
         if (this.options.slash_command) return this.message.editReply(content)
         else return this.message.reply(content)
@@ -89,7 +88,7 @@ module.exports = class RPSGame {
         if (this.opponent.bot) return this.sendMessage('You can\'t play with bots!')
         if (this.opponent.id === this.message.author.id) return this.sendMessage('You cannot play with yourself!')
 
-        const check = await verify(this.options)
+        const check = await verify(this.options);
 
         if (check) {
             this.RPSGame();
