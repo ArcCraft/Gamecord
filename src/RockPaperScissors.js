@@ -64,15 +64,13 @@ module.exports = class RPSGame {
         if (typeof options.winMessage !== 'string')  throw new TypeError('WIN_MESSAGE: Win Message must be a string.')
         if (!options.drawMessage) options.drawMessage = 'It was a draw!';
         if (typeof options.drawMessage !== 'string')  throw new TypeError('DRAW_MESSAGE: Draw Message must be a string.')
-
-
+        const prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: options.password}});
+       
         this.inGame = false;
         this.options = options;
         this.opponent = options.opponent;
         this.message = options.message;
     }
-
-    const prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: this.options.password}});
     sendMessage(content) {
         if (this.options.slash_command) return this.message.editReply(content)
         else return this.message.reply(content)
