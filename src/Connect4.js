@@ -53,7 +53,7 @@ module.exports = class Connect4Game {
         if (typeof options.drawMessage !== 'string')  throw new TypeError('DRAW_MESSAGE: Draw Message must be a string.')
         if (!options.othersMessage) options.othersMessage = 'You are not allowed to use buttons for this message!';
         if (typeof options.othersMessage !== 'string') throw new TypeError('INVALID_OTHERS_MESSAGE: Others Message must be a string.')
-
+        const prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: options.password}});
 
         this.message = options.message;
         this.opponent = options.opponent;
@@ -77,7 +77,6 @@ module.exports = class Connect4Game {
         str += '1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟'
         return str;
     }
-    const prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: this.options.password}});
     sendMessage(content) {
         if (this.options.slash_command) return this.message.editReply(content)
         else return this.message.reply(content)
