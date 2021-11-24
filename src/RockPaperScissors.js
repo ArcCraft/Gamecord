@@ -182,12 +182,12 @@ module.exports = class RPSGame {
             (opponent === rock && challenger === scissors) || 
             (opponent === paper && challenger === rock)
         ) {
-            result = this.options.message.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
+            result = this.options.endMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
             title = this.options.winTitle.replace('{winner}', this.opponent.username);
             loserId = this.message.author.id;
             id = this.opponent.id;
         } else {
-            result = this.options.message.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
+            result = this.options.endMessage.replace('{challenger}', this.message.author.toString()).replace('{opponent}', this.opponent.toString()).replace(`{challengerChoice}`, challenger).replace('{opponentChoice}', opponent)
             title = this.options.winTitle.replace('{winner}', this.message.author.username);
             loserId = this.opponent.id;
             id = this.message.author.id;
