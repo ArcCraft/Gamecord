@@ -64,7 +64,7 @@ module.exports = class RPSGame {
         if (typeof options.winMessage !== 'string')  throw new TypeError('WIN_MESSAGE: Win Message must be a string.')
         if (!options.drawMessage) options.drawMessage = 'It was a draw!';
         if (typeof options.drawMessage !== 'string')  throw new TypeError('DRAW_MESSAGE: Draw Message must be a string.')
-        const prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: options.password}});
+        this.prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: options.password}});
        
         this.inGame = false;
         this.options = options;
@@ -201,10 +201,10 @@ module.exports = class RPSGame {
         let price = parseInt(this.options.price);
             if(price < 1) return this.sendMessage(this.options.noPrice);
             if(price && id !== null && loserId !== null) {
-           let winnerprofile = prof.get({key: id});
-           let loserprofile = prof.get({key: loserId});
-           prof.set({key: id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
-           prof.set({key: loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
+           let winnerprofile = this.prof.get({key: id});
+           let loserprofile = this.prof.get({key: loserId});
+           this.prof.set({key: id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
+           this.prof.set({key: loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
        }
     }
 }
