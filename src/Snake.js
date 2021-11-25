@@ -56,7 +56,7 @@ if(!options.overembed) options.overembed = {};
         if (!options.stopButton) options.stopButton = 'Stop';
         if (typeof options.stopButton !== 'string') throw new TypeError('INVALID_STOP_BUTTON: Stop Button must be a string.')
         // Other : scoretitle,
-       const game = new Database({path: 'databases/games.json', crypto: {encrypt:true, password: options.password}});
+        this.game = new Database({path: 'databases/games.json', crypto: {encrypt:true, password: options.password}});
         this.snake = [{ x: 5, y: 5 }];
         this.apple = { x: 1, y: 1 };
         this.snakeLength = 1;
@@ -206,7 +206,14 @@ if(!options.overembed) options.overembed = {};
         .addField(`${this.options.overembed.timetitle}`, `<t:${parseInt(time)}:R>`)
         .setThumbnail(this.options.overembed.overth);
 
-        return await msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) })
+        await msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) })
+         if(this.game.get({key: `${this.message.author.id}_status`})) {
+           let data = this.game.get({key: `${this.message.author.id}_status`});
+           if(this.score > data.score) this.game.set({key: `${this.message.author.id}_status`, value: {score: this.score, lvl: data.lvl}});
+           if(this.lvl > data.lvl) this.game.set({key: `${this.message.author.id}_status`, value: {score: data.score, lvl: this.lvl}});
+} else {
+     this.game.set({key: `${this.message.author.id}_status`, value: {score: this.score, lvl: this.lvl}});
+}
     }
 
 
@@ -280,13 +287,6 @@ if(!options.overembed) options.overembed = {};
 
         collector.on('end', async() => {
             if (this.isInGame == true) this.gameOver(msg);
-            if(game.get({key: `${this.message.author.id}_status`})) {
-           let data = game.get({key: `${this.message.author.id}_status`});
-           if(this.score > data.score) game.set({key: `${this.message.author.id}_status`, value: {score: this.score, lvl: data.lvl}});
-           if(this.lvl > data.lvl) game.set({key: `${this.message.author.id}_status`, value: {score: data.score, lvl: this.lvl}});
-} else {
-      game.set({key: `${this.message.author.id}_status`, value: {score: this.score, lvl: this.lvl}});
-}
         })
     }
 }
