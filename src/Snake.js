@@ -201,8 +201,8 @@ if(!options.overembed) options.overembed = {};
         const editEmbed = new MessageEmbed()
         .setColor(this.options.overembed.overcolor)
         .setTitle(this.options.overembed.overTitle)
-        .addField(`${this.options.embed.scoretitle}`, `${this.score}`)
-        .addField(`${this.options.lvltitle}`, `${this.lvl || '0'}`)
+        .addField(`${this.options.emojis.food} ${this.options.embed.scoretitle}`, `${this.score}`)
+        .addField(`🏆 ${this.options.lvltitle}`, `${this.lvl || '0'}`)
         .addField(`${this.options.overembed.timetitle}`, `<t:${parseInt(time)}:R>`)
         .setThumbnail(this.options.overembed.overth);
 
