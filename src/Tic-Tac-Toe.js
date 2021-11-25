@@ -203,7 +203,7 @@ module.exports = class TicTacToe {
             if(price) {
            let winnerprofile = this.prof.get({key: result.id});
            let loserprofile = this.prof.get({key: result.loserId});
-           this.prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins) + patseInt(this.options.price)}});
+           this.prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins) + parseInt(this.options.price)}});
            this.prof.set({key: result.loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
     }
   }
