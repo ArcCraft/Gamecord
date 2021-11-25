@@ -61,7 +61,7 @@ module.exports = class TicTacToe {
         if (typeof options.winMessage !== 'string')  throw new TypeError('WIN_MESSAGE: Win Message must be a string.')
         if (!options.drawMessage) options.drawMessage = 'It was a draw!';
         if (typeof options.drawMessage !== 'string')  throw new TypeError('DRAW_MESSAGE: Draw Message must be a string.')
-        const prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: options.password}});
+        this.prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: options.password}});
         
 		this.options = options;
         this.message = options.message;
@@ -201,10 +201,10 @@ module.exports = class TicTacToe {
             let price = parseInt(this.options.price);
             if(price < 1) return this.sendMessage(this.options.noPrice);
             if(price) {
-           let winnerprofile = prof.get({key: result.id});
-           let loserprofile = prof.get({key: result.loserId});
-           prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
-           prof.set({key: result.loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
+           let winnerprofile = this.prof.get({key: result.id});
+           let loserprofile = this.prof.get({key: result.loserId});
+           this.prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
+           this.prof.set({key: result.loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
     }
   }
 }
