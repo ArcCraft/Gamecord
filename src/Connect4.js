@@ -89,8 +89,8 @@ module.exports = class Connect4Game {
             this.message.author = this.message.user;
         }
 
-        if (this.opponent.bot) return this.sendMessage('You can\'t play with bots!')
-        if (this.opponent.id === this.message.author.id) return this.sendMessage('You cannot play with yourself!')
+        if (this.opponent.bot) return this.sendMessage(this.options.botsMessage)
+        // if (this.opponent.id === this.message.author.id) return this.sendMessage(this.options.yourselfMessage)
 
         const check = await verify(this.options)
 
