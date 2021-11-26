@@ -53,7 +53,7 @@ module.exports = class Connect4Game {
         if (typeof options.drawMessage !== 'string')  throw new TypeError('DRAW_MESSAGE: Draw Message must be a string.')
         if (!options.othersMessage) options.othersMessage = 'You are not allowed to use buttons for this message!';
         if (typeof options.othersMessage !== 'string') throw new TypeError('INVALID_OTHERS_MESSAGE: Others Message must be a string.')
-        const prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: options.password}});
+        this.prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: options.password}});
 
         this.message = options.message;
         this.opponent = options.opponent;
@@ -154,10 +154,10 @@ module.exports = class Connect4Game {
             let price = parseInt(this.options.price);
             if(price < 1) return this.sendMessage(this.options.noPrice);
             if(price) {
-           let winnerprofile = prof.get({key: result.players.winner.id});
-           let loserprofile = prof.get({key: result.players.loser.id});
-           prof.set({key: result.players.winner.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
-           prof.set({key: result.players.loser.id, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
+           let winnerprofile = this.prof.get({key: result.players.winner.id});
+           let loserprofile = this.prof.get({key: result.players.loser.id});
+           this.prof.set({key: result.players.winner.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
+           this.prof.set({key: result.players.loser.id, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
       }
     }
   }
