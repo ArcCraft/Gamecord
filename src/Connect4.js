@@ -290,6 +290,6 @@ module.exports = class Connect4Game {
         else if (result.result === 'error')
             return 'ERROR: ' + result.error;
         else
-            return this.options.winMessage.replace('{emoji}', result.emoji).replace('{winner}', result.name);
+            return this.options.winMessage.replace('{emoji}', result.emoji).replace('{winner}', result.players.winner.username);
     }
 }
