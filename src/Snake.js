@@ -156,10 +156,10 @@ if(!options.overembed) options.overembed = {};
         .setDescription(this.getGameBoard() + `**${this.options.emojis.food} ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** 0`);
 
 
-        const up = new MessageButton().setEmoji(emojis.up).setStyle('PRIMARY').setCustomId('snake_up')
-        const left = new MessageButton().setEmoji(emojis.left).setStyle('PRIMARY').setCustomId('snake_left')
-        const down = new MessageButton().setEmoji(emojis.down).setStyle('PRIMARY').setCustomId('snake_down')
-        const right = new MessageButton().setEmoji(emojis.right).setStyle('PRIMARY').setCustomId('snake_right')
+        const up = new MessageButton().setLabel(emojis.up).setStyle('PRIMARY').setCustomId('snake_up')
+        const left = new MessageButton().setLabel(emojis.left).setStyle('PRIMARY').setCustomId('snake_left')
+        const down = new MessageButton().setLabel(emojis.down).setStyle('PRIMARY').setCustomId('snake_down')
+        const right = new MessageButton().setLabel(emojis.right).setStyle('PRIMARY').setCustomId('snake_right')
         const stop = new MessageButton().setLabel(this.options.stopButton).setStyle('DANGER').setCustomId('snake_stop')
 
         const dis1 = new MessageButton().setLabel('\u200b').setStyle('SECONDARY').setCustomId('dis1').setDisabled(true)
