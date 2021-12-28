@@ -4,8 +4,8 @@ const ms = require('ms');
 const moment = require('moment');
 const Database = require('st.db');
 
-       const WIDTH = 17;
-       const HEIGHT = 18;
+       const WIDTH = 15;
+       const HEIGHT = 10;
 
 module.exports = class SnakeGame {
     constructor(options = {}) {
