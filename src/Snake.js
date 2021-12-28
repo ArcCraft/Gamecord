@@ -152,6 +152,7 @@ if(!options.overembed) options.overembed = {};
 
         
         const embed = new MessageEmbed()
+        .setTitle('idk')
         .setColor(this.options.embed.color)
         .setDescription(this.getGameBoard() + `**${this.options.emojis.food} ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** 0`);
 
@@ -185,6 +186,7 @@ if(!options.overembed) options.overembed = {};
         }
 
         const moveEmbed = new MessageEmbed()
+        .setTitle('idk')
         .setColor(this.options.embed.color)
         .setDescription(this.getGameBoard() + `**${this.options.emojis.food} ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.lvl || '0'}`);
 
