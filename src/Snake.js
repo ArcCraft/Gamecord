@@ -55,8 +55,8 @@ if(!options.overembed) options.overembed = {};
         if (!options.stopButton) options.stopButton = 'Stop';
         if (typeof options.stopButton !== 'string') throw new TypeError('INVALID_STOP_BUTTON: Stop Button must be a string.')
         // Other : scoretitle,
-        if(options.message.guild.cache.get(options.messsge.author.id).presence?.clientStatus.mobile) HEIGHT = 14;
-        if(!options.message.guild.cache.get(options.messsge.author.id).presence?.clientStatus.mobile) HEIGHT = 10; 
+        if(options.message.guild.members.cache.get(options.messsge.author.id).presence?.clientStatus.mobile) HEIGHT = 14;
+        if(!options.message.guild.members.cache.get(options.messsge.author.id).presence?.clientStatus.mobile) HEIGHT = 10; 
         this.game = new Database({path: 'databases/games.json', crypto: {encrypt:true, password: options.password}});
         this.snake = [{ x: 5, y: 5 }];
         this.apple = { x: 1, y: 1 };
