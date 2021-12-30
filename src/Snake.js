@@ -152,8 +152,8 @@ if(!options.overembed) options.overembed = {};
         
         const embed = new MessageEmbed()
         .setColor(this.options.embed.color)
-        .setDescription(`Test\n` + this.getGameBoard() + `**${this.options.emojis.food} ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** 0`);
-
+        .setDescription(this.getGameBoard() + `**${this.options.emojis.food} ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** 0`);
+        if(this.options.embed.gametitle) embed.setTitle(this.options.embed.gametitle);
 
         const up = new MessageButton().setLabel(emojis.up).setStyle('PRIMARY').setCustomId('snake_up')
         const left = new MessageButton().setLabel(emojis.left).setStyle('PRIMARY').setCustomId('snake_left')
@@ -184,8 +184,9 @@ if(!options.overembed) options.overembed = {};
         }
 
         const moveEmbed = new MessageEmbed()
-        .setColor(`Test\n` + this.options.embed.color)
+        .setColor(this.options.embed.color)
         .setDescription(this.getGameBoard() + `**${this.options.emojis.food} ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** ${this.lvl || '0'}`);
+        if(this.options.embed.gametitle) embed.setTitle(this.options.embed.gametitle);
 
         msg.edit({ embeds: [moveEmbed], components: msg.components }) 
     }
