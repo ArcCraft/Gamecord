@@ -152,7 +152,9 @@ if(!options.overembed) options.overembed = {};
         
         const embed = new MessageEmbed()
         .setColor(this.options.embed.color)
-        .setDescription(this.getGameBoard() + `**${this.options.emojis.food} ${this.options.embed.scoretitle} :** ${this.score}\n**🏆 ${this.options.lvltitle} :** 0`);
+        .setDescription(this.getGameBoard())
+        .addField(`${this.options.emojis.food} **${this.options.embed.scoretitle} :**`, `${this.score}`)
+        .addField(`🏆 **${this.options.lvltitle} :**`, `0`);
         if(this.options.embed.gametitle) embed.setTitle(this.options.embed.gametitle);
 
         const up = new MessageButton().setLabel(emojis.up).setStyle('PRIMARY').setCustomId('snake_up')
@@ -186,8 +188,8 @@ if(!options.overembed) options.overembed = {};
         const moveEmbed = new MessageEmbed()
         .setColor(this.options.embed.color)
         .setDescription(this.getGameBoard())
-        .addField(`${this.options.emojis.food} **${this.options.embed.scoretitle} :** ${this.score}`)
-        .addField(`🏆 **${this.options.lvltitle} :** ${this.lvl || '0'}`);
+        .addField(`${this.options.emojis.food} **${this.options.embed.scoretitle} :**`, `${this.score}`)
+        .addField(`🏆 **${this.options.lvltitle} :**`, `${this.lvl || '0'}`);
         if(this.options.embed.gametitle) embed.setTitle(this.options.embed.gametitle);
 
         msg.edit({ embeds: [moveEmbed], components: msg.components }) 
