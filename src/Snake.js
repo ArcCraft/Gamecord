@@ -3,8 +3,8 @@ const { disableButtons } = require('../utils/utils');
 const ms = require('ms');
 const moment = require('moment');
 const Database = require('st.db');
-const WIDTH = 17;
-const HEIGHT = 10;
+let WIDTH = 17;
+let HEIGHT = 10;
 
 module.exports = class SnakeGame {
     constructor(options = {}) {
@@ -55,6 +55,7 @@ if(!options.overembed) options.overembed = {};
         if (!options.stopButton) options.stopButton = 'Stop';
         if (typeof options.stopButton !== 'string') throw new TypeError('INVALID_STOP_BUTTON: Stop Button must be a string.')
         // Other : scoretitle,
+        if(options.message.guild.cache.get(options.messsge.author.id).presence?.clientStatus.mobile) HEIGHT = ; 
         this.game = new Database({path: 'databases/games.json', crypto: {encrypt:true, password: options.password}});
         this.snake = [{ x: 5, y: 5 }];
         this.apple = { x: 1, y: 1 };
