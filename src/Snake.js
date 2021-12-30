@@ -3,7 +3,7 @@ const { disableButtons } = require('../utils/utils');
 const ms = require('ms');
 const moment = require('moment');
 const Database = require('st.db');
-const WIDTH = 16;
+const WIDTH = 18;
 const HEIGHT = 10;
 
 module.exports = class SnakeGame {
@@ -190,7 +190,7 @@ if(!options.overembed) options.overembed = {};
         .setDescription(this.getGameBoard())
         .addField(`${this.options.emojis.food} **${this.options.embed.scoretitle} :**`, `${this.score}`)
         .addField(`🏆 **${this.options.lvltitle} :**`, `${this.lvl || '0'}`);
-        if(this.options.embed.gametitle) embed.setTitle(this.options.embed.gametitle);
+        if(this.options.embed.gametitle) moveEmbed.setTitle(this.options.embed.gametitle);
 
         msg.edit({ embeds: [moveEmbed], components: msg.components }) 
     }
