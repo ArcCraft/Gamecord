@@ -4,7 +4,7 @@ const ms = require('ms');
 const moment = require('moment');
 const Database = require('st.db');
 const WIDTH = 17;
-const HEIGHT = 14;
+const HEIGHT = 12;
 
 module.exports = class SnakeGame {
     constructor(options = {}) {
@@ -153,8 +153,8 @@ if(!options.overembed) options.overembed = {};
         const embed = new MessageEmbed()
         .setColor(this.options.embed.color)
         .setDescription(this.getGameBoard())
-        .addField(`${this.options.emojis.food} **${this.options.embed.scoretitle} :**`, `${this.score}`)
-        .addField(`🏆 **${this.options.lvltitle} :**`, `0`);
+        .addField(`${this.options.emojis.food} **${this.options.embed.scoretitle} :**`, `${this.score}`, true)
+        .addField(`🏆 **${this.options.lvltitle} :**`, `0`, true);
         if(this.options.embed.gametitle) embed.setTitle(this.options.embed.gametitle);
 
         const up = new MessageButton().setLabel(emojis.up).setStyle('PRIMARY').setCustomId('snake_up')
@@ -188,8 +188,8 @@ if(!options.overembed) options.overembed = {};
         const moveEmbed = new MessageEmbed()
         .setColor(this.options.embed.color)
         .setDescription(this.getGameBoard())
-        .addField(`${this.options.emojis.food} **${this.options.embed.scoretitle} :**`, `${this.score}`)
-        .addField(`🏆 **${this.options.lvltitle} :**`, `${this.lvl || '0'}`);
+        .addField(`${this.options.emojis.food} **${this.options.embed.scoretitle} :**`, `${this.score}`, true)
+        .addField(`🏆 **${this.options.lvltitle} :**`, `${this.lvl || '0'}`, true);
         if(this.options.embed.gametitle) moveEmbed.setTitle(this.options.embed.gametitle);
 
         msg.edit({ embeds: [moveEmbed], components: msg.components }) 
