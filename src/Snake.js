@@ -3,8 +3,8 @@ const { disableButtons } = require('../utils/utils');
 const ms = require('ms');
 const moment = require('moment');
 const Database = require('st.db');
-const WIDTH = 18;
-const HEIGHT = 10;
+const WIDTH = 17;
+const HEIGHT = 14;
 
 module.exports = class SnakeGame {
     constructor(options = {}) {
