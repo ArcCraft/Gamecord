@@ -205,6 +205,8 @@ module.exports = class RPSGame {
            let loserprofile = this.prof.get({key: loserId});
            this.prof.set({key: id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
            this.prof.set({key: loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
+           this.prof.push(`coins_lb`, {user: `<@${id}>`, coins: String(winnerprofile.coins + Number(this.options.price))})
+           this.prof.push(`coins_lb`, {user: `<@${loserid}>`, coins: String(loserprofile.coins + Number(this.options.price))})
        }
     }
 }
