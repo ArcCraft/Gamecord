@@ -209,7 +209,7 @@ module.exports = class TicTacToe {
            this.prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins) + parseInt(this.options.price)}});
            this.prof.set({key: result.loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
            this.prof.push(`coins_lb`, {user: `<@${result.id}>`, coins: String(winnerprofile.coins + Number(this.options.price))})
-           this.prof.push(`coins_lb`, {user: `<@${result.loserId}>`, coins: String(loserprofile.coins + Number(this.options.price))})
+           this.prof.push(`coins_lb`, {user: `<@${result.loserId}>`, coins: String(loserprofile.coins - Number(this.options.price))})
 
     }
   }
