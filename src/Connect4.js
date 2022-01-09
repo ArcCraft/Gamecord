@@ -163,7 +163,7 @@ module.exports = class Connect4Game {
            this.prof.set({key: result.players.winner.id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
            this.prof.set({key: result.players.loser.id, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
            this.prof.push(`coins_lb`, {user: `<@${result.players.winner.id}>`, coins: String(winnerprofile.coins + Number(this.options.price))})
-           this.prof.push(`coins_lb`, {user: `<@${result.players.loser.id}>`, coins: String(loserprofile.coins + Number(this.options.price))})
+           this.prof.push(`coins_lb`, {user: `<@${result.players.loser.id}>`, coins: String(loserprofile.coins - Number(this.options.price))})
       }
     }
   }
