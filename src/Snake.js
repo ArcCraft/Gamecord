@@ -57,7 +57,11 @@ if(!options.overembed) options.overembed = {};
         // Other : scoretitle,
         if(options.message.guild.members.cache.get(options.message.author.id).presence?.clientStatus.mobile) HEIGHT = 14;
         if(!options.message.guild.members.cache.get(options.message.author.id).presence?.clientStatus.mobile) HEIGHT = 10; 
-        this.game = new Database({path: 'databases/games.json', crypto: {encrypt:true, password: options.password}});
+        if(options.database.encrypt) {
+        this.game = new Database({path: options.database.game_path, crypto: {encrypt:true, password: options.database.password}});
+        } else {
+        this.game = new Database({path: options.database.game_path});
+        }
         this.snake = [{ x: 5, y: 5 }];
         this.apple = { x: 1, y: 1 };
         this.snakeLength = 1;
