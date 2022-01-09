@@ -53,7 +53,11 @@ module.exports = class Connect4Game {
         if (typeof options.drawMessage !== 'string')  throw new TypeError('DRAW_MESSAGE: Draw Message must be a string.')
         if (!options.othersMessage) options.othersMessage = 'You are not allowed to use buttons for this message!';
         if (typeof options.othersMessage !== 'string') throw new TypeError('INVALID_OTHERS_MESSAGE: Others Message must be a string.')
-        this.prof = new Database({path: `databases/profile.json`, crypto: {encrypt:true, password: options.password}});
+        if(options.database.encrypt) {
+        this.prof = new Database({path: options.database.profile_path, crypto: {encrypt:true, password: options.database.password}});
+        } else {
+        this.prof = new Database({path: options.database.profile_path});
+        }
 
         this.message = options.message;
         this.opponent = options.opponent;
