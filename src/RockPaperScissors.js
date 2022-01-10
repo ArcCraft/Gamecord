@@ -211,9 +211,9 @@ module.exports = class RPSGame {
            this.prof.set({key: loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
 let obj = this.prof.get('coins_lb');
 let userIndex = obj.findIndex(x => x.user === `<@${id}>`);
-      let myIndex = obj.findIndex(v => v.user === `<@${loserid}>`);
+      let myIndex = obj.findIndex(v => v.user === `<@${loserId}>`);
       if(userIndex < 0) this.prof.push(`coins_lb`, {user: `<@${id}>`, coins: String(winnerprofile.coins + Number(this.options.price))});
-      if(myIndex < 0) this.prof.push(`coins_lb`, {user: `<@${loserid}>`, coins: String(loserprofile.coins - Number(this.options.price))});
+      if(myIndex < 0) this.prof.push(`coins_lb`, {user: `<@${loserId}>`, coins: String(loserprofile.coins - Number(this.options.price))});
 obj[userIndex].coins = String(winnerprofile.coins + Number(this.options.price));
 obj[myIndex].coins = String(loserprofile.coins - Number(this.options.price));
 this.prof.set('coins_lb', obj)
