@@ -209,10 +209,10 @@ module.exports = class TicTacToe {
            this.prof.set({key: result.id, value: {coins: parseInt(winnerprofile.coins) + parseInt(this.options.price)}});
            this.prof.set({key: result.loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
 let obj = this.prof.get('coins_lb');
-let userIndex = obj.findIndex(x => x.user === `<@${user.id}>`);
-      let myIndex = obj.findIndex(v => v.user === `<@${lb.author.id}>`);
-      if(userIndex < 0) this.prof.push(`coins_lb`, {user: `<@${user.id}>`, coins: String(winnerprofile.coins + Number(this.options.price))});
-      if(myIndex < 0) this.prof.push(`coins_lb`, {user: `<@${user.id}>`, coins: String(loserprofile.coins - Number(this.options.price))});
+let userIndex = obj.findIndex(x => x.user === `<@${result.id}>`);
+      let myIndex = obj.findIndex(v => v.user === `<@${result.loserId}>`);
+      if(userIndex < 0) this.prof.push(`coins_lb`, {user: `<@${result.id}>`, coins: String(winnerprofile.coins + Number(this.options.price))});
+      if(myIndex < 0) this.prof.push(`coins_lb`, {user: `<@${result.loserId}>`, coins: String(loserprofile.coins - Number(this.options.price))});
 obj[userIndex].coins = String(winnerprofile.coins + Number(this.options.price));
 obj[myIndex].coins = String(loserprofile.coins - Number(this.options.price));
 this.prof.set('coins_lb', obj)
