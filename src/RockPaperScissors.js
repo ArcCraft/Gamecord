@@ -209,8 +209,14 @@ module.exports = class RPSGame {
            let loserprofile = this.prof.get({key: loserId});
            this.prof.set({key: id, value: {coins: parseInt(winnerprofile.coins + this.options.price)}});
            this.prof.set({key: loserId, value: {coins: parseInt(loserprofile.coins - this.options.price)}});
-           this.prof.push(`coins_lb`, {user: `<@${id}>`, coins: String(winnerprofile.coins + Number(this.options.price))})
-           this.prof.push(`coins_lb`, {user: `<@${loserid}>`, coins: String(loserprofile.coins - Number(this.options.price))})
+let obj = this.prof.get('coins_lb');
+let userIndex = obj.findIndex(x => x.user === `<@${result.players.winner.id}>`);
+      let myIndex = obj.findIndex(v => v.user === `<@${result.players.loser.id}>`);
+      if(userIndex < 0) this.prof.push(`coins_lb`, {user: `<@${id}>`, coins: String(winnerprofile.coins + Number(this.options.price))});
+      if(myIndex < 0) this.prof.push(`coins_lb`, {user: `<@${loserid}>`, coins: String(loserprofile.coins - Number(this.options.price))});
+obj[userIndex].coins = String(winnerprofile.coins + Number(this.options.price));
+obj[myIndex].coins = String(loserprofile.coins - Number(this.options.price));
+this.prof.set('coins_lb', obj)
        }
     }
 }
