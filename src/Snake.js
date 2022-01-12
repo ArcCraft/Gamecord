@@ -203,11 +203,13 @@ if(!options.overembed) options.overembed = {};
 
 
     async gameOver(msg) {
-        let overembed = new MessageEmbed()
+        /*
+let overembed = new MessageEmbed()
         .setColor(this.options.embed.color)
         .setDescription(this.getGameBoard())
         .addField(`${this.options.emojis.food} **${this.options.embed.scoretitle} :** ${this.score}`)
         .addField(`🏆 **${this.options.lvltitle} :** 0`);
+*/
         let time = this.message.createdAt / 1000;
         this.isInGame = false;
         const editEmbed = new MessageEmbed()
