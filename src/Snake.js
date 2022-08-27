@@ -228,7 +228,7 @@ let overembed = new MessageEmbed()
            if(this.score > data.score) {
            this.game.set({key: `${this.message.author.id}_status`, value: {score: this.score, lvl: data.lvl}});
            if(myIndex < 0) {
-        obj.push({user: `<@${this.message.author.id}>`, score: this.score, lvl: data.lvl});
+        obj.push({user: `${this.message.author.id}`, score: this.score, lvl: data.lvl});
         this.game.set('snake_lb', obj)
       } else {   
 obj[myIndex].score = this.score;
@@ -238,7 +238,7 @@ this.game.set('snake_lb', obj)
            } else if(this.lvl > data.lvl) {
            this.game.set({key: `${this.message.author.id}_status`, value: {score: data.score, lvl: this.lvl}});
            if(myIndex < 0) {
-        obj.push({user: `<@${this.message.author.id}>`, score: data.score, lvl: this.lvl});
+        obj.push({user: `${this.message.author.id}`, score: data.score, lvl: this.lvl});
         this.game.set('snake_lb', obj)
       } else {   
 obj[myIndex].score = data.score;
@@ -249,9 +249,9 @@ this.game.set('snake_lb', obj)
 } else {
      this.game.set({key: `${this.message.author.id}_status`, value: {score: this.score, lvl: this.lvl}});
      let obj = this.game.get('snake_lb');
-      let myIndex = obj.findIndex(v => v.user === `<@${this.message.author.id}>`);
+      let myIndex = obj.findIndex(v => v.user === `${this.message.author.id}`);
       if(myIndex < 0) {
-        obj.push({user: `<@${this.message.author.id}>`, score: this.score, lvl: this.lvl});
+        obj.push({user: `${this.message.author.id}`, score: this.score, lvl: this.lvl});
         this.game.set('snake_lb', obj)
       } else {   
 obj[myIndex].score = this.score;
